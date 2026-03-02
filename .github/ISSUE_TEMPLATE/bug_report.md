@@ -8,7 +8,7 @@ labels: bug
 A clear description of what the problem is.
 
 **Steps to reproduce**
-1. Run `git-fleet --path ...`
+1. Run `branchboard --path ...`
 2. Press '...'
 3. See error
 
@@ -23,7 +23,7 @@ If applicable, add a screenshot of the terminal.
 - Python: [output of `python3 --version`]
 - Git: [output of `git --version`]
 - gh CLI: [output of `gh --version`]
-- git-fleet: [output of `pip show git-fleet | grep Version`]
+- branchboard: [output of `pip show branchboard | grep Version`]
 
 **Error output**
 ```

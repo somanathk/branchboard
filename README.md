@@ -1,11 +1,11 @@
-# git-fleet
+# branchboard
 
 A terminal dashboard that scans your local Git repositories and shows an interactive, color-coded overview of every branch — dirty worktrees, unpushed commits, open PRs, stale branches, and more.
 
 Built for developers who juggle dozens of repos and want a single view of what needs attention.
 
 <picture>
-  <img alt="git-fleet main dashboard" src="docs/screenshots/main-dashboard.svg" width="100%">
+  <img alt="branchboard main dashboard" src="docs/screenshots/main-dashboard.svg" width="100%">
 </picture>
 
 ## Features
@@ -47,20 +47,20 @@ gh auth login
 ### pip (from PyPI)
 
 ```bash
-pip install git-fleet
+pip install branchboard
 ```
 
 ### pipx (recommended — isolated install, no venv needed)
 
 ```bash
-pipx install git-fleet
+pipx install branchboard
 ```
 
 ### From source
 
 ```bash
-git clone https://github.com/somanathk/git-fleet.git
-cd git-fleet
+git clone https://github.com/somanathk/branchboard.git
+cd branchboard
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -e .
@@ -69,20 +69,20 @@ pip install -e .
 ### Verify
 
 ```bash
-git-fleet --help
+branchboard --help
 ```
 
 ## Usage
 
 ```bash
 # Scan the default directory (~/Work/repos)
-git-fleet
+branchboard
 
 # Scan a custom directory
-git-fleet --path /path/to/your/repos
+branchboard --path /path/to/your/repos
 
 # Bypass the cache and fetch fresh data
-git-fleet --no-cache
+branchboard --no-cache
 ```
 
 ### CLI Options
@@ -170,7 +170,7 @@ See exactly which files have uncommitted changes.
 ## How It Works
 
 ```
-git-fleet starts
+branchboard starts
   └─ LoadingScreen with progress bar
        ├─ Phase 1: Discover repos (os.walk, 3 levels deep)
        ├─ Phase 2: Scan branches (git for-each-ref + git status, 10 concurrent)
@@ -181,16 +181,16 @@ git-fleet starts
 
 - **Repo discovery** walks the directory tree looking for `.git` directories
 - **Git scanning** runs `git for-each-ref`, `git status --porcelain`, and `git remote get-url origin` concurrently across repos
-- **PR fetching** calls `gh pr list --state all --author @me --json ...` for each unique GitHub remote, with results cached to `~/.cache/git-fleet/` (5-minute TTL)
+- **PR fetching** calls `gh pr list --state all --author @me --json ...` for each unique GitHub remote, with results cached to `~/.cache/branchboard/` (5-minute TTL)
 - **Classification** is pure logic — no I/O — mapping Git state + PR state into the branch state enum
 
 ## Project Structure
 
 ```
-git-fleet/
+branchboard/
 ├── pyproject.toml                 # Package config and entry point
-├── src/git_fleet/
-│   ├── __main__.py                # python -m git_fleet
+├── src/branchboard/
+│   ├── __main__.py                # python -m branchboard
 │   ├── cli.py                     # Argument parsing (--path, --no-cache)
 │   ├── app.py                     # Textual App — screen composition, key bindings
 │   ├── app.tcss                   # Textual CSS layout
@@ -198,7 +198,7 @@ git-fleet/
 │   ├── scanner.py                 # Async repo discovery + git data collection
 │   ├── github.py                  # gh CLI wrapper for PR data
 │   ├── classify.py                # Branch state classification logic
-│   ├── cache.py                   # JSON file cache (~/.cache/git-fleet/)
+│   ├── cache.py                   # JSON file cache (~/.cache/branchboard/)
 │   ├── screens/
 │   │   ├── loading.py             # Progress bar modal during scan
 │   │   └── detail.py              # Branch/PR detail modal
@@ -213,13 +213,13 @@ git-fleet/
 
 ## Configuration
 
-git-fleet uses sensible defaults and requires no configuration file. Behavior is controlled via CLI flags.
+branchboard uses sensible defaults and requires no configuration file. Behavior is controlled via CLI flags.
 
 | Setting | Value | How to Change |
 |---|---|---|
 | Scan root | `~/Work/repos` | `--path` flag |
 | Scan depth | 3 levels | Not configurable (covers most monorepo layouts) |
-| Cache location | `~/.cache/git-fleet/` | Not configurable |
+| Cache location | `~/.cache/branchboard/` | Not configurable |
 | Cache TTL | 5 minutes | Not configurable; use `--no-cache` or press `r` |
 | Stale threshold | 14 days | Not configurable |
 | Git concurrency | 10 | Not configurable |

@@ -3,7 +3,7 @@ from __future__ import annotations
 from rich.text import Text
 from textual.widgets import Static
 
-from git_fleet.models import BranchInfo, BranchState, STATE_BADGE_STYLES
+from branchboard.models import BranchInfo, BranchState, STATE_BADGE_STYLES
 
 
 class SummaryBar(Static):

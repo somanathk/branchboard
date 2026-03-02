@@ -3,8 +3,8 @@ from __future__ import annotations
 import asyncio
 import json
 import re
-from git_fleet.models import BranchInfo, PRInfo
-from git_fleet.cache import load_cache, save_cache
+from branchboard.models import BranchInfo, PRInfo
+from branchboard.cache import load_cache, save_cache
 
 _GH_SEMAPHORE = asyncio.Semaphore(5)
 

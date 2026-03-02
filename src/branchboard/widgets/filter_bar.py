@@ -5,7 +5,7 @@ from textual.containers import Horizontal
 from textual.widgets import Input, Select
 from textual.widget import Widget
 
-from git_fleet.models import BranchState
+from branchboard.models import BranchState
 
 
 _STATE_OPTIONS: list[tuple[str, str]] = [

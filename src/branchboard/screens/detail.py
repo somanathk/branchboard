@@ -6,7 +6,7 @@ from textual.containers import Center, Middle, VerticalScroll
 from textual.screen import ModalScreen
 from textual.widgets import Label, Static
 
-from git_fleet.models import BranchInfo
+from branchboard.models import BranchInfo
 
 
 class DetailScreen(ModalScreen[None]):

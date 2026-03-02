@@ -16,7 +16,7 @@ def _check_dependencies() -> None:
     if not shutil.which("gh"):
         print("error: GitHub CLI (gh) is not installed or not on PATH", file=sys.stderr)
         print()
-        print("  git-fleet uses `gh` to fetch PR data from GitHub.", file=sys.stderr)
+        print("  branchboard uses `gh` to fetch PR data from GitHub.", file=sys.stderr)
         print()
         print("  Install:", file=sys.stderr)
         print("    macOS:  brew install gh", file=sys.stderr)
@@ -29,7 +29,7 @@ def _check_dependencies() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        prog="git-fleet",
+        prog="branchboard",
         description="Git Branch Dashboard TUI — scan repos and show branch/PR status",
     )
     parser.add_argument(
@@ -46,7 +46,7 @@ def main() -> None:
 
     _check_dependencies()
 
-    from git_fleet.app import GitFleetApp
+    from branchboard.app import GitFleetApp
 
     app = GitFleetApp(scan_path=args.path, use_cache=not args.no_cache)
     app.run()

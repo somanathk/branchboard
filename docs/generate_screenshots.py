@@ -1,4 +1,4 @@
-"""Generate screenshots of git-fleet with fake data for documentation."""
+"""Generate screenshots of branchboard with fake data for documentation."""
 from __future__ import annotations
 
 import asyncio
@@ -10,12 +10,12 @@ from textual.binding import Binding
 from textual.containers import Vertical
 from textual.widgets import DataTable, Footer, Input, Select
 
-from git_fleet.models import BranchInfo, BranchState, PRInfo
-from git_fleet.classify import classify_all
-from git_fleet.screens.detail import DetailScreen
-from git_fleet.widgets.branch_table import BranchTable
-from git_fleet.widgets.filter_bar import FilterBar
-from git_fleet.widgets.summary_bar import SummaryBar
+from branchboard.models import BranchInfo, BranchState, PRInfo
+from branchboard.classify import classify_all
+from branchboard.screens.detail import DetailScreen
+from branchboard.widgets.branch_table import BranchTable
+from branchboard.widgets.filter_bar import FilterBar
+from branchboard.widgets.summary_bar import SummaryBar
 
 SCREENSHOTS_DIR = Path(__file__).parent / "screenshots"
 
@@ -265,8 +265,8 @@ FAKE_BRANCHES: list[BranchInfo] = [
 class ScreenshotApp(App):
     """Fake app for taking screenshots."""
 
-    TITLE = "git-fleet"
-    CSS_PATH = "../src/git_fleet/app.tcss"
+    TITLE = "branchboard"
+    CSS_PATH = "../src/branchboard/app.tcss"
 
     BINDINGS = [
         Binding("q", "quit", "Quit"),

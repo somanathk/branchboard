@@ -5,7 +5,7 @@ import os
 from datetime import datetime, timezone
 from pathlib import Path
 
-from git_fleet.models import BranchInfo
+from branchboard.models import BranchInfo
 
 # Scan up to 10 repos concurrently
 _GIT_SEMAPHORE = asyncio.Semaphore(10)

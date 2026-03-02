@@ -1,13 +1,13 @@
-# Contributing to git-fleet
+# Contributing to branchboard
 
-Thanks for your interest in improving git-fleet! This guide covers how to get set up and submit changes.
+Thanks for your interest in improving branchboard! This guide covers how to get set up and submit changes.
 
 ## Development Setup
 
 ```bash
 # Clone the repo
-git clone https://github.com/somanathk/git-fleet.git
-cd git-fleet
+git clone https://github.com/somanathk/branchboard.git
+cd branchboard
 
 # Create a virtual environment (Python 3.12+)
 python3 -m venv .venv
@@ -17,13 +17,13 @@ source .venv/bin/activate
 pip install -e .
 
 # Verify it runs
-git-fleet --help
+branchboard --help
 ```
 
 ## Project Layout
 
 ```
-src/git_fleet/
+src/branchboard/
 ├── models.py       # Data structures (BranchState, BranchInfo, PRInfo)
 ├── scanner.py      # Async git subprocess calls
 ├── github.py       # gh CLI wrapper for PR data
@@ -45,9 +45,9 @@ src/git_fleet/
 
 2. **Make your changes.** Keep commits focused on a single concern.
 
-3. **Test manually** by running `git-fleet` against a directory with Git repos:
+3. **Test manually** by running `branchboard` against a directory with Git repos:
    ```bash
-   git-fleet --path ~/your/repos --no-cache
+   branchboard --path ~/your/repos --no-cache
    ```
 
 4. **Regenerate screenshots** if you changed the UI:

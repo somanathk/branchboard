@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone, timedelta
-from git_fleet.models import BranchInfo, BranchState, STATE_PRIORITY
+from branchboard.models import BranchInfo, BranchState, STATE_PRIORITY
 
 _STALE_DAYS = 14
 

@@ -5,7 +5,7 @@ from rich.text import Text
 from textual.binding import Binding
 from textual.widgets import DataTable
 
-from git_fleet.models import BranchInfo, BranchState, STATE_PRIORITY
+from branchboard.models import BranchInfo, BranchState, STATE_PRIORITY
 
 
 def _relative_time(dt: datetime | None) -> str:

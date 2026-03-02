@@ -9,22 +9,22 @@ from textual.binding import Binding
 from textual.containers import Vertical
 from textual.widgets import DataTable, Footer, Input, Select
 
-from git_fleet.cache import clear_cache
-from git_fleet.classify import classify_all
-from git_fleet.github import fetch_all_prs
-from git_fleet.models import BranchInfo
-from git_fleet.scanner import scan_all_repos
-from git_fleet.screens.detail import DetailScreen
-from git_fleet.screens.loading import LoadingScreen
-from git_fleet.widgets.branch_table import BranchTable
-from git_fleet.widgets.filter_bar import FilterBar
-from git_fleet.widgets.summary_bar import SummaryBar
+from branchboard.cache import clear_cache
+from branchboard.classify import classify_all
+from branchboard.github import fetch_all_prs
+from branchboard.models import BranchInfo
+from branchboard.scanner import scan_all_repos
+from branchboard.screens.detail import DetailScreen
+from branchboard.screens.loading import LoadingScreen
+from branchboard.widgets.branch_table import BranchTable
+from branchboard.widgets.filter_bar import FilterBar
+from branchboard.widgets.summary_bar import SummaryBar
 
 
 class GitFleetApp(App):
     """Git Branch Dashboard TUI."""
 
-    TITLE = "git-fleet"
+    TITLE = "branchboard"
     CSS_PATH = "app.tcss"
 
     BINDINGS = [

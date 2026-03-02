@@ -5,7 +5,7 @@ import os
 import time
 from pathlib import Path
 
-_CACHE_DIR = Path.home() / ".cache" / "git-fleet"
+_CACHE_DIR = Path.home() / ".cache" / "branchboard"
 _TTL_SECONDS = 5 * 60  # 5 minutes
 
 
