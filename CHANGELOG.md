@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 (2026-03-02)
+
+- Fix screenshots not rendering on PyPI: convert SVGs to PNGs and use absolute `raw.githubusercontent.com` URLs
+
 ## 0.1.0 (2026-03-02)
 
 Initial release.
