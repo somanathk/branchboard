@@ -1,0 +1,60 @@
+Screen {
+    background: #1e1e2e;
+}
+
+#main-container {
+    height: 1fr;
+}
+
+#branch-table {
+    height: 1fr;
+}
+
+/* Loading screen */
+LoadingScreen {
+    align: center middle;
+}
+
+#loading-box {
+    width: 60;
+    height: 10;
+    border: round #8be9fd;
+    padding: 1 2;
+    background: #282a36;
+}
+
+#loading-label {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1;
+    color: #f8f8f2;
+}
+
+#loading-progress {
+    width: 100%;
+}
+
+/* Detail modal */
+DetailScreen {
+    align: center middle;
+}
+
+#detail-box {
+    width: 90;
+    max-height: 80%;
+    border: round #8be9fd;
+    padding: 1 2;
+    background: #282a36;
+    overflow-y: auto;
+}
+
+#detail-title {
+    text-style: bold;
+    margin-bottom: 1;
+    width: 100%;
+    color: #f8f8f2;
+}
+
+#detail-content {
+    width: 100%;
+}
