@@ -4,9 +4,7 @@ A terminal dashboard that scans your local Git repositories and shows an interac
 
 Built for developers who juggle dozens of repos and want a single view of what needs attention.
 
-<picture>
-  <img alt="branchboard main dashboard" src="docs/screenshots/main-dashboard.svg" width="100%">
-</picture>
+![branchboard main dashboard](https://raw.githubusercontent.com/somanathk/branchboard/main/docs/screenshots/main-dashboard.png)
 
 ## Features
 
@@ -139,33 +137,25 @@ Branches are classified into states based on local Git status and GitHub PR data
 
 Press `Enter` on any row to see full branch and PR details.
 
-<picture>
-  <img alt="detail modal" src="docs/screenshots/detail-modal.svg" width="100%">
-</picture>
+![detail modal](https://raw.githubusercontent.com/somanathk/branchboard/main/docs/screenshots/detail-modal.png)
 
 ### Filtered View
 
 Use the search bar or state dropdown to narrow results.
 
-<picture>
-  <img alt="filtered view" src="docs/screenshots/filtered-view.svg" width="100%">
-</picture>
+![filtered view](https://raw.githubusercontent.com/somanathk/branchboard/main/docs/screenshots/filtered-view.png)
 
 ### Recency Sort
 
 Press `s` to sort by most recently active branches.
 
-<picture>
-  <img alt="recency sort" src="docs/screenshots/recency-sort.svg" width="100%">
-</picture>
+![recency sort](https://raw.githubusercontent.com/somanathk/branchboard/main/docs/screenshots/recency-sort.png)
 
 ### Dirty File Details
 
 See exactly which files have uncommitted changes.
 
-<picture>
-  <img alt="dirty file details" src="docs/screenshots/dirty-detail.svg" width="100%">
-</picture>
+![dirty file details](https://raw.githubusercontent.com/somanathk/branchboard/main/docs/screenshots/dirty-detail.png)
 
 ## How It Works
 
