@@ -22,7 +22,7 @@ Built for developers who juggle dozens of repos and want a single view of what n
 
 | Requirement | Version | Purpose |
 |---|---|---|
-| **Python** | 3.12+ | Runtime |
+| **Python** | 3.9+ | Runtime |
 | **Git** | any | Local branch and status data |
 | **[GitHub CLI (`gh`)](https://cli.github.com/)** | 2.0+ | Fetching PR data from GitHub |
 

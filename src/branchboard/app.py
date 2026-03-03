@@ -8,6 +8,7 @@ from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.containers import Vertical
 from textual.widgets import DataTable, Footer, Input, Select
+from textual.worker import Worker, WorkerState
 
 from branchboard.cache import clear_cache
 from branchboard.classify import classify_all
@@ -25,7 +26,7 @@ class GitFleetApp(App):
     """Git Branch Dashboard TUI."""
 
     TITLE = "branchboard"
-    CSS_PATH = "app.tcss"
+    CSS_PATH = Path(__file__).parent / "app.tcss"
 
     BINDINGS = [
         Binding("q", "quit", "Quit"),
@@ -41,6 +42,7 @@ class GitFleetApp(App):
         self._scan_path = scan_path
         self._use_cache = use_cache
         self._branches: list[BranchInfo] = []
+        self._loading: LoadingScreen | None = None
 
     def compose(self) -> ComposeResult:
         yield SummaryBar(id="summary")
@@ -49,33 +51,41 @@ class GitFleetApp(App):
             yield BranchTable(id="branch-table")
         yield Footer()
 
-    async def on_mount(self) -> None:
-        await self._do_scan()
+    def on_mount(self) -> None:
+        # Push the loading screen synchronously so Textual renders it on the
+        # very first frame, then immediately return so the event loop is free.
+        self._loading = LoadingScreen()
+        self.push_screen(self._loading)
+        # Kick off the scan as a background worker — decoupled from on_mount
+        # so the loading screen is already visible before work begins.
+        self.run_worker(self._scan(), exclusive=True, name="scan")
 
-    async def _do_scan(self) -> None:
-        loading = LoadingScreen()
-        self.push_screen(loading)
+    async def _scan(self) -> None:
+        """Background worker: scan repos, fetch PRs, classify, update UI."""
+        loading = self._loading
 
-        try:
-            # Phase 1: git scanning
-            async def on_git_progress(done: int, total: int) -> None:
+        async def on_git_progress(done: int, total: int) -> None:
+            if loading:
                 loading.update_progress(done, total)
 
-            branches = await scan_all_repos(self._scan_path, on_progress=on_git_progress)
+        # Phase 1: git scanning — progress bar
+        branches = await scan_all_repos(self._scan_path, on_progress=on_git_progress)
 
-            # Phase 2: GitHub PR fetching
+        # Phase 2: GitHub PR fetching — spinner
+        if loading:
             loading.set_phase("Fetching PR data from GitHub…")
-            await fetch_all_prs(branches, use_cache=self._use_cache)
+        await fetch_all_prs(branches, use_cache=self._use_cache)
 
-            # Phase 3: classify
-            classify_all(branches)
-            self._branches = branches
-        finally:
-            self.pop_screen()
-
-        # Update UI
+        # Phase 3: classify + populate table while loading modal still covers it
+        classify_all(branches)
+        self._branches = branches
         self._update_display()
-        # Focus the table so keyboard shortcuts work
+
+        # Pop only after table is fully populated — no blank flash
+        if self._loading and self._loading in self.screen_stack:
+            self.pop_screen()
+        self._loading = None
+
         self.query_one("#branch-table", BranchTable).focus()
 
     def _update_display(self) -> None:
@@ -97,10 +107,12 @@ class GitFleetApp(App):
             table = self.query_one("#branch-table", BranchTable)
             table.set_state_filter(str(event.value))
 
-    async def action_refresh(self) -> None:
+    def action_refresh(self) -> None:
         clear_cache()
         self._use_cache = False
-        await self._do_scan()
+        self._loading = LoadingScreen()
+        self.push_screen(self._loading)
+        self.run_worker(self._scan(), exclusive=True, name="scan")
 
     def action_open_pr(self) -> None:
         table = self.query_one("#branch-table", BranchTable)
