@@ -46,9 +46,9 @@ def main() -> None:
 
     _check_dependencies()
 
-    from branchboard.app import GitFleetApp
+    from branchboard.app import BranchBoardApp
 
-    app = GitFleetApp(scan_path=args.path, use_cache=not args.no_cache)
+    app = BranchBoardApp(scan_path=args.path, use_cache=not args.no_cache)
     app.run()
 
 

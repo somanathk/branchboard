@@ -48,6 +48,8 @@ class LoadingScreen(ModalScreen[None]):
 
     def update_progress(self, done: int, total: int) -> None:
         """Phase 1: git scanning — update progress bar, spinner keeps running."""
+        if not self.is_mounted:
+            return
         bar = self.query_one("#loading-progress", ProgressBar)
         label = self.query_one("#loading-label", Label)
         if total > 0:
@@ -56,5 +58,7 @@ class LoadingScreen(ModalScreen[None]):
 
     def set_phase(self, text: str) -> None:
         """Phase 2: GitHub fetch — hide progress bar, spinner continues."""
+        if not self.is_mounted:
+            return
         self.query_one("#loading-label", Label).update(text)
         self.query_one("#loading-progress", ProgressBar).display = False

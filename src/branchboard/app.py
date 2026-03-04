@@ -22,7 +22,7 @@ from branchboard.widgets.filter_bar import FilterBar
 from branchboard.widgets.summary_bar import SummaryBar
 
 
-class GitFleetApp(App):
+class BranchBoardApp(App):
     """Git Branch Dashboard TUI."""
 
     TITLE = "branchboard"
@@ -63,6 +63,10 @@ class GitFleetApp(App):
     async def _scan(self) -> None:
         """Background worker: scan repos, fetch PRs, classify, update UI."""
         loading = self._loading
+
+        # Give the LoadingScreen time to mount before we start querying widgets.
+        if loading and not loading.is_mounted:
+            await asyncio.sleep(0.05)
 
         async def on_git_progress(done: int, total: int) -> None:
             if loading:
