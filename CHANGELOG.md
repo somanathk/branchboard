@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.7 (2026-03-04)
+
+- Fix PR detection for repos using custom SSH host aliases (e.g. `github.com-work`)
+
 ## 0.1.6 (2026-03-04)
 
 - Fix crash on startup: guard LoadingScreen widget queries with `is_mounted` check

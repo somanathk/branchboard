@@ -17,8 +17,8 @@ _GH_FIELDS = [
 
 def _extract_owner_repo(remote_url: str) -> str | None:
     """Extract 'owner/repo' from a git remote URL."""
-    # SSH: git@github.com:owner/repo.git
-    m = re.match(r"git@github\.com:(.+?)(?:\.git)?$", remote_url)
+    # SSH: git@github.com:owner/repo.git (also matches aliases like github.com-work)
+    m = re.match(r"git@github\.com[^:]*:(.+?)(?:\.git)?$", remote_url)
     if m:
         return m.group(1)
     # HTTPS: https://github.com/owner/repo.git
